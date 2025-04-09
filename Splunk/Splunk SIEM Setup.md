@@ -1,42 +1,46 @@
-Splunk SIEM Setup
-This repository contains configuration files and queries to help you set up Splunk as a Security Information and Event Management (SIEM) system. Splunk is a powerful platform for searching, monitoring, and analyzing machine-generated data.
+# Splunk SIEM Setup
 
-Key Components:
-Splunk Configuration Files: Setup files for monitoring and parsing security logs.
+This repository contains configuration files and queries to help you set up **Splunk** as a Security Information and Event Management (SIEM) system. Splunk is a powerful platform for searching, monitoring, and analyzing machine-generated data.
 
-Splunk Queries: Pre-built search queries for detecting security events.
+---
 
-Splunk Dashboards: Visualizations to monitor security incidents.
+## Key Components:
+- **Splunk Configuration Files**: Setup files for monitoring and parsing security logs.
+- **Splunk Queries**: Pre-built search queries for detecting security events.
+- **Splunk Dashboards**: Visualizations to monitor security incidents.
 
-Setup Instructions
-1. Install Splunk
+---
+
+## Setup Instructions
+
+# 1. Install Splunk
+
 Follow the steps to install Splunk on your machine:
-
-Splunk Download : https://www.splunk.com/en_us/download.html
+- **Splunk Download**: [Splunk Download](https://www.splunk.com/en_us/download.html)
 
 Extract and install:
 
-
-sudo tar -xvf splunk-<version>-<platform>.tgz -C /opt
+```bash
+sudo tar -xvf splunk-<version>.tgz -C /opt
 sudo /opt/splunk/bin/splunk start --accept-license
+```
+
 Access the Splunk UI: http://localhost:8000
 
-2. Configure Splunk
+## 2. Configure Splunk
 Place the following configuration files in the /opt/splunk/etc/system/local/ directory:
 
-inputs.conf: Log files to monitor.
+- inputs.conf: Log files to monitor.
+- props.conf: How Splunk parses the incoming logs.
+- transforms.conf: Apply field extraction and masking.
 
-props.conf: How Splunk parses the incoming logs.
-
-transforms.conf: Apply field extraction and masking.
 
 After adding the files, restart Splunk:
-
-bash
-Copier
-Modifier
+```bash
 sudo /opt/splunk/bin/splunk restart
-Folder Structure
+```
+
+## Folder Structure
 splunk_config/
 Contains Splunk configuration files for setting up log monitoring:
 
@@ -63,24 +67,3 @@ failed_logins_dashboard.xml: Shows failed login attempts.
 suspicious_activities_dashboard.xml: Shows suspicious activities.
 
 brute_force_detection_dashboard.xml: Displays brute-force attack data.
-
-Example Queries
-Failed Login Detection:
-splunk
-Copier
-Modifier
-index=syslog sourcetype=syslog "failed password"
-Suspicious User Activity:
-splunk
-Copier
-Modifier
-index=syslog sourcetype=syslog "sudo" OR "privilege escalation"
-Brute Force Detection:
-splunk
-Copier
-Modifier
-index=syslog sourcetype=syslog "authentication failure" | stats count by src_ip
-References
-Splunk Documentation
-
-Splunk Security Essentials
