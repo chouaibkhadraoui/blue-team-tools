@@ -59,3 +59,23 @@ Splunk dashboards for visualizing security events:
 - **failed_logins_dashboard.xml**: Shows failed login attempts.
 - **suspicious_activities_dashboard.xml**: Shows suspicious activities.
 - **brute_force_detection_dashboard.xml**: Displays brute-force attack data.
+
+## Example Queries
+
+### 1. Failed Login Detection:
+```splunk
+index=syslog sourcetype=syslog "failed password"
+```
+## 2. Suspicious User Activity:
+```splunk
+index=syslog sourcetype=syslog "sudo" OR "privilege escalation"
+```
+## 3. Brute Force Detection:
+```splunk
+index=syslog sourcetype=syslog "authentication failure" | stats count by src_ip
+```
+
+## References
+Splunk Documentation
+
+Splunk Security Essentials
