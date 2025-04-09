@@ -12,13 +12,11 @@ Setup Instructions
 1. Install Splunk
 Follow the steps to install Splunk on your machine:
 
-Splunk Download
+Splunk Download : https://www.splunk.com/en_us/download.html
 
 Extract and install:
 
-bash
-Copier
-Modifier
+
 sudo tar -xvf splunk-<version>-<platform>.tgz -C /opt
 sudo /opt/splunk/bin/splunk start --accept-license
 Access the Splunk UI: http://localhost:8000
