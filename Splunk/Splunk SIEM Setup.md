@@ -76,6 +76,7 @@ index=syslog sourcetype=syslog "authentication failure" | stats count by src_ip
 ```
 
 ## References
-Splunk Documentation
+Splunk Documentation : https://docs.splunk.com/Documentation
 
-Splunk Security Essentials
+Splunk Security Essentials : https://splunkbase.splunk.com/app/3435
+
