@@ -41,29 +41,21 @@ sudo /opt/splunk/bin/splunk restart
 ```
 
 ## Folder Structure
-splunk_config/
+
+### `splunk_config/`
 Contains Splunk configuration files for setting up log monitoring:
+- **inputs.conf**: Defines which logs to monitor.
+- **props.conf**: Specifies how Splunk parses the logs.
+- **transforms.conf**: Transforms data like extracting fields and masking sensitive info.
 
-inputs.conf: Defines which logs to monitor.
-
-props.conf: Specifies how Splunk parses the logs.
-
-transforms.conf: Transforms data like extracting fields and masking sensitive info.
-
-splunk_queries/
+### `splunk_queries/`
 Pre-built Splunk search queries to detect security events:
+- **failed_logins.splunk**: Detect failed login attempts.
+- **suspicious_activity.splunk**: Detect suspicious user activities.
+- **brute_force_attempts.splunk**: Identify potential brute-force attacks.
 
-failed_logins.splunk: Detect failed login attempts.
-
-suspicious_activity.splunk: Detect suspicious user activities.
-
-brute_force_attempts.splunk: Identify potential brute-force attacks.
-
-splunk_dashboards/
+### `splunk_dashboards/`
 Splunk dashboards for visualizing security events:
-
-failed_logins_dashboard.xml: Shows failed login attempts.
-
-suspicious_activities_dashboard.xml: Shows suspicious activities.
-
-brute_force_detection_dashboard.xml: Displays brute-force attack data.
+- **failed_logins_dashboard.xml**: Shows failed login attempts.
+- **suspicious_activities_dashboard.xml**: Shows suspicious activities.
+- **brute_force_detection_dashboard.xml**: Displays brute-force attack data.
