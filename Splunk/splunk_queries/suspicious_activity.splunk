@@ -1,0 +1,25 @@
+# --------------------------------------------
+# Query: suspicious_activity.splunk
+# Description: Detects potential suspicious user behavior based on privilege escalation commands.
+#
+#  What It Does:
+# - Searches syslog for commands related to privilege escalation such as 'sudo' or keywords like 'privilege escalation'.
+# - Extracts the username and command executed using regex.
+# - Counts how many times each user ran a suspicious command.
+#
+#  Requirements:
+# - Syslog data must be ingested into Splunk.
+# - Adjust 'index' and 'sourcetype' based on your environment.
+# - Works best with Linux shell history and sudo logs.
+#
+#  Regex Explanation:
+# rex "user (?<username>\w+).*COMMAND=(?<command>.+)"
+# - Matches lines like: "pam_unix(sudo:session): session opened for user root by user1(uid=0)"
+# - (?<username>\w+)  → Captures the username
+# - (?<command>.+)    → Captures the full command run after 'COMMAND='
+# --------------------------------------------
+
+index=syslog sourcetype=syslog ("sudo" OR "privilege escalation")
+| rex "user (?<username>\w+).*COMMAND=(?<command>.+)"
+| stats count by username, command
+| sort - count
