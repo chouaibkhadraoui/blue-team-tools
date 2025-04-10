@@ -1,0 +1,5 @@
+# --------------------------------------------
+# Description: Detects creation of new user accounts or admin group additions.
+# --------------------------------------------
+index=windows EventCode=4720 OR EventCode=4728
+| stats count by user, src, _time
