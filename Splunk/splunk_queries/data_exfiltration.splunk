@@ -1,0 +1,7 @@
+# data_exfiltration.splunk
+# --------------------------------------------
+# Description: Detects large outbound POST requests.
+# --------------------------------------------
+index=proxy sourcetype=web_proxy method=POST
+| stats sum(bytes_out) as total_upload by user, dest
+| where total_upload > 10000000
