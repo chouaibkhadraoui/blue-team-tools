@@ -1,0 +1,19 @@
+title: Failed Login Attempt Detection
+id: 12345678-1234-5678-abcd-12345678abcd
+status: experimental
+description: Detects failed login attempts across multiple systems.
+author: Chouaib Khadraoui
+logsource:
+    category: authentication
+    product: any
+detection:
+    selection:
+        EventID: 4625  # Windows failed login EventID
+    condition: selection
+fields:
+    - user
+    - src_ip
+    - time
+falsepositives:
+    - Legitimate failed logins (e.g., forgotten passwords)
+level: high

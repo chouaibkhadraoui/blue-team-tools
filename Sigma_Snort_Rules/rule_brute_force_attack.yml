@@ -1,0 +1,19 @@
+title: Brute Force Attack Detection
+id: 87654321-4321-8765-abcd-87654321abcd
+status: experimental
+description: Detects multiple failed login attempts from the same IP address.
+author: Chouaib Khadraoui
+logsource:
+    category: authentication
+    product: any
+detection:
+    selection:
+        EventID: 4625
+    condition: selection | count(src_ip) > 5
+fields:
+    - user
+    - src_ip
+    - time
+falsepositives:
+    - Multiple users failing login attempts from the same IP
+level: high

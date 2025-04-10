@@ -1,0 +1,25 @@
+title: Suspicious Command Execution
+id: 23456789-3456-7890-abcd-23456789abcd
+status: experimental
+description: Detects the execution of suspicious commands such as file manipulation or process injection.
+author: Chouaib Khadraoui
+logsource:
+    category: process_creation
+    product: any
+detection:
+    selection:
+        Image:
+            - "*cmd.exe"
+            - "*powershell.exe"
+        CommandLine|contains: 
+            - "exec"
+            - "cmd"
+            - "powershell"
+    condition: selection
+fields:
+    - user
+    - process_name
+    - command_line
+falsepositives:
+    - System administrators running commands for maintenance
+level: high

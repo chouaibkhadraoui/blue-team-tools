@@ -1,0 +1,18 @@
+title: Malicious DNS Query Detection
+id: 34567890-4567-8901-abcd-34567890abcd
+status: experimental
+description: Detects DNS queries with potentially malicious domain names (e.g., domains used by malware).
+author: Chouaib Khadraoui
+logsource:
+    category: dns
+    product: any
+detection:
+    selection:
+        query|regex: "^[a-zA-Z0-9]{20,}\.com$"
+    condition: selection
+fields:
+    - query
+    - client_ip
+falsepositives:
+    - Domain names that look random but are legitimate
+level: medium
