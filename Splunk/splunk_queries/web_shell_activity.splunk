@@ -1,0 +1,7 @@
+# web_shell_activity.splunk
+# --------------------------------------------
+# Description: Detects potential web shell activity.
+# --------------------------------------------
+index=web sourcetype=access_combined uri_path="*.php" OR uri_path="*.asp"
+| search uri_query="cmd=" OR uri_query="exec=" OR uri_query="shell="
+| stats count by uri, client_ip
