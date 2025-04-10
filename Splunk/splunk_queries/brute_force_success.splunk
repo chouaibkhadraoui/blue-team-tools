@@ -1,0 +1,6 @@
+# --------------------------------------------
+# Description: Detects multiple failed logins followed by a success.
+# --------------------------------------------
+index=syslog sourcetype=syslog ("Failed password" OR "Accepted password")
+| transaction src_ip startswith="Failed password" endswith="Accepted password"
+| where eventcount > 3
