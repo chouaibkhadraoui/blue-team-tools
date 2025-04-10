@@ -1,0 +1,9 @@
+# --------------------------------------------
+# Description: Detects usage of PowerShell commands that may be malicious.
+# -------------------------------------------
+# EventCode=4688 = A new process has been created
+index=windows sourcetype=WinEventLog:Security EventCode=4688
+| where process_name="powershell.exe"
+| stats count by user, parent_process, process_command_line
+
+
