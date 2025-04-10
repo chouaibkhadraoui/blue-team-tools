@@ -1,0 +1,8 @@
+# usb_device_insert.splunk
+# --------------------------------------------
+# Description: Monitors USB device insertions.
+# --------------------------------------------
+# event = 2003 : 	Microsoft-Windows-Windows Firewall with Advanced Security
+# event = 2102 : Process %1. All Domain Controller Servers in use are not responding: myserver.mycompany.com
+index=windows sourcetype=WinEventLog:System EventCode=2003 OR EventCode=2102
+| stats count by user, device_id, _time
