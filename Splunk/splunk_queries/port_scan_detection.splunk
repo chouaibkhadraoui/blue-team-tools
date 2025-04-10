@@ -1,0 +1,5 @@
+# Description: Detects potential port scanning activity.
+# --------------------------------------------
+index=firewall action=blocked
+| stats dc(dest_port) as port_count by src_ip
+| where port_count > 20
