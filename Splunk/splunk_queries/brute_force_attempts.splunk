@@ -1,0 +1,27 @@
+# --------------------------------------------
+# Query: brute_force_attempts.splunk
+# Description: Identifies potential brute-force attacks based on multiple failed authentication attempts from the same IP.
+#
+# What It Does:
+# - Searches for repeated authentication failure messages in syslog.
+# - Groups the events by source IP address.
+# - Counts the number of failures per IP to spot brute-force behavior.
+#
+# Requirements:
+# - Syslog data must be ingested into Splunk.
+# - Adjust 'index' and 'sourcetype' based on your environment.
+# - Works best with Linux SSH logs (e.g., /var/log/auth.log) or any log showing "authentication failure".
+#
+# Note:
+# - This version does not use regex since we assume the IP is already parsed or structured in the log format.
+# - Optionally, you could add a `rex` to extract the `src_ip` if it's not automatically available.
+#
+# Example Optional Regex:
+# rex "authentication failure.*rhost=(?<src_ip>\d+\.\d+\.\d+\.\d+)"
+# - Extracts the source IP if included in format like: "authentication failure; rhost=192.168.1.100"
+# --------------------------------------------
+
+index=syslog sourcetype=syslog "authentication failure"
+| stats count by src_ip
+| where count > 5 
+| sort - count
