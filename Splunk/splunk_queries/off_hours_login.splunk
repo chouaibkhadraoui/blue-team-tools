@@ -1,0 +1,7 @@
+# --------------------------------------------
+# Description: Detects successful logins during off-hours.
+# --------------------------------------------
+index=windows EventCode=4624
+| eval hour=strftime(_time, "%H")
+| where hour < 6 OR hour > 22
+| stats count by user, src_ip, hour
